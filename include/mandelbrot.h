@@ -46,16 +46,16 @@ unsigned int *fillMandelbrot(unsigned int width, unsigned int height, double x_m
 /**
  * @brief YUV color values for complex values in the Mandelbrot set.
  */
-const unsigned char *YUV_IN_COLOR;
+extern const unsigned char *YUV_IN_COLOR;
 
 /**
  * @brief Minimum YUV color values for complex values not in the Mandelbrot set.
  */
-const unsigned char *YUV_MIN_COLOR;
+extern const unsigned char *YUV_MIN_COLOR;
 /**
  * @brief Maximum YUV color values for complex values not in the Mandelbrot set, with the maximum number of iterations.
  */
-const unsigned char *YUV_MAX_COLOR;
+extern const unsigned char *YUV_MAX_COLOR;
 
 /**
  * @brief Converts a Mandelbrot set to a YUV format.
