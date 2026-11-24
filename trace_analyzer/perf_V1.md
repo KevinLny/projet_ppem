@@ -1,0 +1,469 @@
+# performance without optimisation:
+
+lobal FPS: 7.99
+
+Total function calls: 462
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>call_count</th>
+      <th>percent_of_total_incl</th>
+      <th>percent_of_total_excl</th>
+      <th>total_cpu_time_including_children</th>
+      <th>total_cpu_time_excluding_children</th>
+      <th>avg_cpu_time_including_children</th>
+      <th>avg_cpu_time_excluding_children</th>
+      <th>percent_of_parent_incl</th>
+      <th>percent_of_parent_excl</th>
+    </tr>
+    <tr>
+      <th>display_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>main</th>
+      <td>1</td>
+      <td>100.00</td>
+      <td>0.02</td>
+      <td>5024557</td>
+      <td>853</td>
+      <td>5024557.00</td>
+      <td>853.00</td>
+      <td>100.00</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>├── yuvDisplayInit</th>
+      <td>1</td>
+      <td>2.74</td>
+      <td>2.74</td>
+      <td>137508</td>
+      <td>137499</td>
+      <td>137508.00</td>
+      <td>137499.00</td>
+      <td>2.74</td>
+      <td>2.74</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; └── startTiming</th>
+      <td>4</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>9</td>
+      <td>9</td>
+      <td>2.25</td>
+      <td>2.25</td>
+      <td>0.01</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>├── startTiming</th>
+      <td>1</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.00</td>
+      <td>1.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>├── fillMandelbrot</th>
+      <td>39</td>
+      <td>89.08</td>
+      <td>89.08</td>
+      <td>4476008</td>
+      <td>4476008</td>
+      <td>114769.44</td>
+      <td>114769.44</td>
+      <td>89.08</td>
+      <td>89.08</td>
+    </tr>
+    <tr>
+      <th>├── MD5_Update</th>
+      <td>39</td>
+      <td>3.93</td>
+      <td>0.02</td>
+      <td>197511</td>
+      <td>1110</td>
+      <td>5064.38</td>
+      <td>28.46</td>
+      <td>3.93</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; ├── MD5_Init</th>
+      <td>39</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>29</td>
+      <td>29</td>
+      <td>0.74</td>
+      <td>0.74</td>
+      <td>0.01</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; ├── body</th>
+      <td>39</td>
+      <td>3.91</td>
+      <td>3.91</td>
+      <td>196285</td>
+      <td>196285</td>
+      <td>5032.95</td>
+      <td>5032.95</td>
+      <td>99.38</td>
+      <td>99.38</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; └── MD5_Final</th>
+      <td>39</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>87</td>
+      <td>60</td>
+      <td>2.23</td>
+      <td>1.54</td>
+      <td>0.04</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; │&nbsp;&nbsp; └── body</th>
+      <td>39</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>27</td>
+      <td>27</td>
+      <td>0.69</td>
+      <td>0.69</td>
+      <td>31.03</td>
+      <td>31.03</td>
+    </tr>
+    <tr>
+      <th>├── mandelbrotToYUV</th>
+      <td>39</td>
+      <td>3.55</td>
+      <td>3.55</td>
+      <td>178138</td>
+      <td>178138</td>
+      <td>4567.64</td>
+      <td>4567.64</td>
+      <td>3.55</td>
+      <td>3.55</td>
+    </tr>
+    <tr>
+      <th>├── yuvDisplay</th>
+      <td>39</td>
+      <td>0.62</td>
+      <td>0.61</td>
+      <td>30944</td>
+      <td>30616</td>
+      <td>793.44</td>
+      <td>785.03</td>
+      <td>0.62</td>
+      <td>0.61</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; ├── stopTiming</th>
+      <td>39</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>161</td>
+      <td>161</td>
+      <td>4.13</td>
+      <td>4.13</td>
+      <td>0.52</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; ├── startTiming</th>
+      <td>39</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>30</td>
+      <td>30</td>
+      <td>0.77</td>
+      <td>0.77</td>
+      <td>0.10</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; └── exitCallBack</th>
+      <td>59</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>137</td>
+      <td>137</td>
+      <td>2.32</td>
+      <td>2.32</td>
+      <td>0.44</td>
+      <td>0.44</td>
+    </tr>
+    <tr>
+      <th>├── stopTiming</th>
+      <td>1</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.00</td>
+      <td>1.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>└── yuvFinalize</th>
+      <td>1</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>3593</td>
+      <td>3589</td>
+      <td>3593.00</td>
+      <td>3589.00</td>
+      <td>0.07</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>│&nbsp;&nbsp; └── exitCallBack</th>
+      <td>4</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>4</td>
+      <td>4</td>
+      <td>1.00</td>
+      <td>1.00</td>
+      <td>0.11</td>
+      <td>0.11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>call_count</th>
+      <th>percent_of_total_incl</th>
+      <th>percent_of_total_excl</th>
+      <th>total_cpu_time_including_children</th>
+      <th>total_cpu_time_excluding_children</th>
+      <th>avg_cpu_time_including_children</th>
+      <th>avg_cpu_time_excluding_children</th>
+      <th>function_file</th>
+      <th>function_address</th>
+    </tr>
+    <tr>
+      <th>function_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>main</th>
+      <td>1</td>
+      <td>100.00</td>
+      <td>0.02</td>
+      <td>5024557</td>
+      <td>853</td>
+      <td>5024557.00</td>
+      <td>853.00</td>
+      <td>/home/boris/Desktop/projet_ppem/src/main.c:20</td>
+      <td>0x402570</td>
+    </tr>
+    <tr>
+      <th>yuvDisplayInit</th>
+      <td>1</td>
+      <td>2.74</td>
+      <td>2.74</td>
+      <td>137508</td>
+      <td>137499</td>
+      <td>137508.00</td>
+      <td>137499.00</td>
+      <td>/home/boris/Desktop/projet_ppem/src/yuvDisplay...</td>
+      <td>0x404700</td>
+    </tr>
+    <tr>
+      <th>startTiming</th>
+      <td>44</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>40</td>
+      <td>40</td>
+      <td>0.91</td>
+      <td>0.91</td>
+      <td>/home/boris/Desktop/projet_ppem/src/clock.c:35</td>
+      <td>0x4028e0</td>
+    </tr>
+    <tr>
+      <th>fillMandelbrot</th>
+      <td>39</td>
+      <td>89.08</td>
+      <td>89.08</td>
+      <td>4476008</td>
+      <td>4476008</td>
+      <td>114769.44</td>
+      <td>114769.44</td>
+      <td>/home/boris/Desktop/projet_ppem/src/mandelbrot...</td>
+      <td>0x4029f0</td>
+    </tr>
+    <tr>
+      <th>MD5_Update</th>
+      <td>39</td>
+      <td>3.93</td>
+      <td>0.02</td>
+      <td>197511</td>
+      <td>1110</td>
+      <td>5064.38</td>
+      <td>28.46</td>
+      <td>/home/boris/Desktop/projet_ppem/src/md5.c:262</td>
+      <td>0x4040c0</td>
+    </tr>
+    <tr>
+      <th>MD5_Init</th>
+      <td>39</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>29</td>
+      <td>29</td>
+      <td>0.74</td>
+      <td>0.74</td>
+      <td>/home/boris/Desktop/projet_ppem/src/md5.c:212</td>
+      <td>0x403580</td>
+    </tr>
+    <tr>
+      <th>body</th>
+      <td>78</td>
+      <td>3.91</td>
+      <td>3.91</td>
+      <td>196312</td>
+      <td>196312</td>
+      <td>2516.82</td>
+      <td>2516.82</td>
+      <td>/home/boris/Desktop/projet_ppem/src/md5.c:105</td>
+      <td>0x4035d0</td>
+    </tr>
+    <tr>
+      <th>MD5_Final</th>
+      <td>39</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>87</td>
+      <td>60</td>
+      <td>2.23</td>
+      <td>1.54</td>
+      <td>/home/boris/Desktop/projet_ppem/src/md5.c:228</td>
+      <td>0x403db0</td>
+    </tr>
+    <tr>
+      <th>mandelbrotToYUV</th>
+      <td>39</td>
+      <td>3.55</td>
+      <td>3.55</td>
+      <td>178138</td>
+      <td>178138</td>
+      <td>4567.64</td>
+      <td>4567.64</td>
+      <td>/home/boris/Desktop/projet_ppem/src/mandelbrot...</td>
+      <td>0x402d20</td>
+    </tr>
+    <tr>
+      <th>yuvDisplay</th>
+      <td>39</td>
+      <td>0.62</td>
+      <td>0.61</td>
+      <td>30944</td>
+      <td>30616</td>
+      <td>793.44</td>
+      <td>785.03</td>
+      <td>/home/boris/Desktop/projet_ppem/src/yuvDisplay...</td>
+      <td>0x404a00</td>
+    </tr>
+    <tr>
+      <th>stopTiming</th>
+      <td>40</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>162</td>
+      <td>162</td>
+      <td>4.05</td>
+      <td>4.05</td>
+      <td>/home/boris/Desktop/projet_ppem/src/clock.c:44</td>
+      <td>0x402920</td>
+    </tr>
+    <tr>
+      <th>exitCallBack</th>
+      <td>63</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>141</td>
+      <td>141</td>
+      <td>2.24</td>
+      <td>2.24</td>
+      <td>/home/boris/Desktop/projet_ppem/src/yuvDisplay...</td>
+      <td>0x4046a0</td>
+    </tr>
+    <tr>
+      <th>yuvFinalize</th>
+      <td>1</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>3593</td>
+      <td>3589</td>
+      <td>3593.00</td>
+      <td>3589.00</td>
+      <td>/home/boris/Desktop/projet_ppem/src/yuvDisplay...</td>
+      <td>0x404ca0</td>
+    </tr>
+  </tbody>
+</table>
+</div>

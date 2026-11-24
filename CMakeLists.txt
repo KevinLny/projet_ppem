@@ -15,7 +15,7 @@ option(ENABLE_PROFILING "Enable profiling with GCC code instrumentation." OFF)
 if(ENABLE_PROFILING AND CMAKE_C_COMPILER_ID STREQUAL "GNU")
 	MESSAGE("Enable gprof profiling for GNU/MinGW Debug builds")
 	add_definitions( -DENABLE_PROFILING )
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-pie -g -finstrument-functions")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --fno-pie -g -finstrument-functions")
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -no-pie")
 	if(WIN32)
 		# Keep traced function pointers in the executable's link-time address range.
@@ -67,10 +67,16 @@ file(
 	./include/*.h
 )
 
+
+set(OpenMP_C_FLAGS "-fopenmp")
+set(OpenMP_C_LIB_NAMES "gomp")
+set(OpenMP_gomp_LIBRARY "/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so")
+
+find_package(OpenMP REQUIRED COMPONENTS C)
 add_executable(mandelbrot ${source_files} ${header_files})
 
 if (WIN32)
-	target_link_libraries(mandelbrot ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY})
+	target_link_libraries(mandelbrot ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} OpenMP::OpenMP_C m)
 else()
-	target_link_libraries(mandelbrot ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} m)
+	target_link_libraries(mandelbrot ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} OpenMP::OpenMP_C m)
 endif()

@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <omp.h>
 
 #include "md5.h"
 #include "clock.h"
@@ -17,8 +18,7 @@
 
 int stopThreads = 0;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     // Initialize display
     yuvDisplayInit(0, DISPLAY_W, DISPLAY_H);
 
@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
 
     unsigned int originIndex = 0;
     unsigned int destinationIndex = 1;
+
     while (!stopThreads)
     {
         // Get current origin and destination

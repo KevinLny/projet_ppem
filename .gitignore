@@ -1,0 +1,4 @@
+build/
+dat/
+.vscode/
+trace_analyzer/__pycache__
