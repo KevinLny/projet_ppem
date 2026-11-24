@@ -41,7 +41,7 @@ unsigned int mandelbrot(complex double c, unsigned int max_iter);
  * @param max_iter The maximum number of iterations to perform for each point.
  * @return A pointer to the array containing the Mandelbrot set values.
  */
-unsigned int *fillMandelbrot(unsigned int width, unsigned int height, double x_min, double x_max, double y_min, double y_max, unsigned int max_iter);
+unsigned int *fillMandelbrot(unsigned int width, unsigned int height, double x_min, double x_max, double y_min, double y_max, unsigned int max_iter, unsigned int *mandelbrot_set);
 
 /**
  * @brief YUV color values for complex values in the Mandelbrot set.
@@ -70,7 +70,7 @@ extern const unsigned char *YUV_MAX_COLOR;
  * @param max_iter The maximum number of iterations used in the Mandelbrot set computation.
  * @return A pointer to the array containing the YUV values.
  */
-unsigned char *mandelbrotToYUV(unsigned int *mandelbrot_set, unsigned int width, unsigned int height, unsigned int max_iter);
+unsigned char *mandelbrotToYUV(unsigned int *mandelbrot_set, unsigned int width, unsigned int height, unsigned int max_iter, unsigned char *yuv_image);
 
 /**
  * @brief Structure representing a point in the trajectory of the Mandelbrot set exploration.

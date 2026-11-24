@@ -35,7 +35,7 @@ unsigned int mandelbrot(complex double c, unsigned int max_iter)
     complex double z = 0.0 + 0.0 * I;
     unsigned int iter = 0;
 
-    while (cabs(z) <= 2.0 && iter < max_iter)
+    while (creal(z)*creal(z) +cimag(z)*cimag(z) <= 4.0 && iter < max_iter)
     {
         z = z * z + c;
         iter++;
@@ -44,22 +44,13 @@ unsigned int mandelbrot(complex double c, unsigned int max_iter)
     return iter;
 }
 
-unsigned int *fillMandelbrot(unsigned int width, unsigned int height, double x_min, double x_max, double y_min, double y_max, unsigned int max_iter)
+unsigned int *fillMandelbrot(unsigned int width, unsigned int height, double x_min, double x_max, double y_min, double y_max, unsigned int max_iter, unsigned int *mandelbrot_set)
 {
-
-    // Allocate memory for the Mandelbrot set array
-    unsigned int *mandelbrot_set = (unsigned int *)malloc(width * height * sizeof(unsigned int));
-    if (mandelbrot_set == NULL)
-    {
-        fprintf(stderr, "Memory allocation failed for mandelbrot_set\n");
-        return NULL;
-    }
 
     // Check that the precision of the complex number is sufficient for the given range
     if (x_min + (x_max - x_min) * 1.0 / (width - 1) == x_min || y_min + (y_max - y_min) * 1.0 / (height - 1) == y_min)
     {
         fprintf(stderr, "Range is too small for sufficient precision\n");
-        free(mandelbrot_set);
         return NULL;
     }
 
@@ -78,17 +69,8 @@ unsigned int *fillMandelbrot(unsigned int width, unsigned int height, double x_m
     return mandelbrot_set;
 }
 
-unsigned char *mandelbrotToYUV(unsigned int *mandelbrot_set, unsigned int width, unsigned int height, unsigned int max_iter)
+unsigned char *mandelbrotToYUV(unsigned int *mandelbrot_set, unsigned int width, unsigned int height, unsigned int max_iter, unsigned char *yuv_image)
 {
-
-    // Allocate memory for the YUV image
-    unsigned char *yuv_image = (unsigned char *)malloc(width * height * 3 * sizeof(unsigned char));
-    if (yuv_image == NULL)
-    {
-        fprintf(stderr, "Memory allocation failed for yuv_image\n");
-        return NULL;
-    }
-
     // Create separate pointers for Y, U, and V components
     unsigned char *y = yuv_image;
     unsigned char *u = yuv_image + width * height;
