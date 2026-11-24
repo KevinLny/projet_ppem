@@ -8,10 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #include "md5.h"
 #include "clock.h"
 #include "yuvDisplay.h"
 #include "mandelbrot.h"
+
 
 #define MAX_ITER 75
 
@@ -39,6 +41,7 @@ int main(int argc, char *argv[])
 
         // Print the mandelbrot for the given waypoints
         unsigned int step;
+       
         for (step = 0; step < destination->steps && !stopThreads; step++)
         {
 

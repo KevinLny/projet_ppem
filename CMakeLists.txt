@@ -10,12 +10,13 @@ cmake_minimum_required(VERSION 3.8...4.1)
 
 project(mandelbrot)
 
+
 # Profiling option.
 option(ENABLE_PROFILING "Enable profiling with GCC code instrumentation." OFF)
 if(ENABLE_PROFILING AND CMAKE_C_COMPILER_ID STREQUAL "GNU")
 	MESSAGE("Enable gprof profiling for GNU/MinGW Debug builds")
 	add_definitions( -DENABLE_PROFILING )
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-pie -g -finstrument-functions")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-pie -g -finstrument-functions  ")
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -no-pie")
 	if(WIN32)
 		# Keep traced function pointers in the executable's link-time address range.
@@ -69,8 +70,12 @@ file(
 
 add_executable(mandelbrot ${source_files} ${header_files})
 
+# OpenMP
+find_package(OpenMP REQUIRED)
+
 if (WIN32)
-	target_link_libraries(mandelbrot ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY})
+	target_link_libraries(mandelbrot OpenMP::OpenMP_C ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY})
 else()
-	target_link_libraries(mandelbrot ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} m)
+	target_link_libraries(mandelbrot OpenMP::OpenMP_C ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} m)
 endif()
+

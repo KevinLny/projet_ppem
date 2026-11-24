@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
+#include <omp.h>
 #include "mandelbrot.h"
 
 const unsigned char *YUV_IN_COLOR = (const unsigned char[]){0, 128, 128};   // YUV representation of black
@@ -35,7 +35,8 @@ unsigned int mandelbrot(complex double c, unsigned int max_iter)
     complex double z = 0.0 + 0.0 * I;
     unsigned int iter = 0;
 
-    while (cabs(z) <= 2.0 && iter < max_iter)
+   // while (cabs(z) <= 2.0 && iter < max_iter)
+   while (cabs(z) <= 2.0 && iter < max_iter)
     {
         z = z * z + c;
         iter++;
@@ -62,11 +63,14 @@ unsigned int *fillMandelbrot(unsigned int width, unsigned int height, double x_m
         free(mandelbrot_set);
         return NULL;
     }
+    
 
     // Fill the Mandelbrot set array
-    for (unsigned int j = 0; j < height; j++)
+    unsigned int i, j;
+     #pragma omp parallel for schedule (dynamic, 2)
+    for (/*unsigned int*/ j = 0; j < height; j++)
     {
-        for (unsigned int i = 0; i < width; i++)
+        for (/*unsigned int*/ i = 0; i < width; i++)
         {
             double x = x_min + (x_max - x_min) * i / (width - 1);
             double y = y_min + (y_max - y_min) * j / (height - 1);
