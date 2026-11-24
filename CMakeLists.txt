@@ -10,7 +10,6 @@ cmake_minimum_required(VERSION 3.8...4.1)
 
 project(mandelbrot)
 
-
 # Profiling option.
 option(ENABLE_PROFILING "Enable profiling with GCC code instrumentation." OFF)
 if(ENABLE_PROFILING AND CMAKE_C_COMPILER_ID STREQUAL "GNU")

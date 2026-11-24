@@ -8,12 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 #include "md5.h"
 #include "clock.h"
 #include "yuvDisplay.h"
 #include "mandelbrot.h"
-
 
 #define MAX_ITER 75
 
@@ -30,6 +28,22 @@ int main(int argc, char *argv[])
 
     unsigned int originIndex = 0;
     unsigned int destinationIndex = 1;
+
+    // Allocate memory for the Mandelbrot set array
+    unsigned int *mandelbrot_set = (unsigned int *)malloc(DISPLAY_W * DISPLAY_H * sizeof(unsigned int));
+    if (mandelbrot_set == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed for mandelbrot_set\n");
+    }
+
+
+    // Allocate memory for the YUV image
+    unsigned char *yuv_image = (unsigned char *)malloc(DISPLAY_H * DISPLAY_W * 3 * sizeof(unsigned char));
+    if (yuv_image == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed for yuv_image\n");
+    }
+
     while (!stopThreads)
     {
         // Get current origin and destination
@@ -41,7 +55,6 @@ int main(int argc, char *argv[])
 
         // Print the mandelbrot for the given waypoints
         unsigned int step;
-       
         for (step = 0; step < destination->steps && !stopThreads; step++)
         {
 
@@ -57,17 +70,15 @@ int main(int argc, char *argv[])
             double yMax = cimag(center) + delta / 2;
 
             // Compute mandelbrot
-            unsigned int *mandelbrot_set = fillMandelbrot(DISPLAY_H, DISPLAY_W, xMin, xMax, yMin, yMax, MAX_ITER);
+            fillMandelbrot(DISPLAY_H, DISPLAY_W, xMin, xMax, yMin, yMax, MAX_ITER, mandelbrot_set);
 
             // Compute MD5
             MD5_Update(DISPLAY_H * DISPLAY_W * sizeof(unsigned int), mandelbrot_set);
 
             // Display mandelbrot
-            unsigned char *yuv_image = mandelbrotToYUV(mandelbrot_set, DISPLAY_H, DISPLAY_W, MAX_ITER);
-            free(mandelbrot_set);
+            mandelbrotToYUV(mandelbrot_set, DISPLAY_H, DISPLAY_W, MAX_ITER, yuv_image);
 
             yuvDisplay(0, yuv_image, yuv_image + DISPLAY_H * DISPLAY_W, yuv_image + (unsigned int)(1.5 * DISPLAY_H * DISPLAY_W));
-            free(yuv_image);
         }
 
         // Display clock
@@ -86,6 +97,8 @@ int main(int argc, char *argv[])
 
     // Finalize display
     yuvFinalize(0);
+    free(mandelbrot_set);
+    free(yuv_image);
 
     return 0;
 }
